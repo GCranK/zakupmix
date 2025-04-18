@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Закупки Shake&Pear</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Формирование заказа</h1>
+        <div class="locations">
+            <div class="location-tab active" data-location="shakePear">
+                <i class="fas fa-store"></i> Shake&Pear
+            </div>
+            <div class="location-tab" data-location="ijodCafe">
+                <i class="fas fa-mug-hot"></i> IjodCafe
+            </div>
+            <div class="location-tab" data-location="ilhomBar">
+                <i class="fas fa-cocktail"></i> Ilhom Bar
+            </div>
+        </div>
+        <div class="tabs">
+            <div class="tab active" data-warehouse="bar">
+                <i class="fas fa-glass-martini-alt"></i> Бар
+            </div>
+            <div class="tab" data-warehouse="kitchen">
+                <i class="fas fa-utensils"></i> Кухня
+            </div>
+            <div class="tab" data-warehouse="household">
+                <i class="fas fa-broom"></i> Хоз. часть
+            </div>
+        </div>
+        <div id="categories" class="grid"></div>
+        <div id="products" class="hidden">
+            <h2>Выберите товары</h2>
+            <ul id="productList"></ul>
+            <button id="sendData">📤 Отправить заказ</button>
+        </div>
+    </div>
+    <div id="loader" class="loader-overlay">
+        <div class="loader"></div>
+        <p>Отправка заказа...</p>
+    </div>
+    <script src="./js/script.js"></script>
+</body>
+</html>

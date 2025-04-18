@@ -1,1 +1,1 @@
-# zakupmix
+# zakup
