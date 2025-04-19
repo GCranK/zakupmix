@@ -402,21 +402,27 @@ function updateWarehouseTabs(location) {
             warehouse: currentWarehouse,
             items
         };
-        fetch("https://frontend-developer.uz/sendzakup.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(requestBody)
-        })
-        .then(response => response.text())
-        .then(data => {
-            alert("✅ Заказ отправлен!");
-            loader.style.display = "none";
-            location.reload();
-        })
-        .catch(error => {
-            alert("❌ Ошибка отправки заказа!");
-            loader.style.display = "none";
-        });
+        setTimeout(() => {
+            fetch("https://frontend-developer.uz/sendzakup.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ warehouse: currentWarehouse, items })
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log("Ответ сервера:", data);
+                alert("✅ Заказ отправлен!");
+                setTimeout(() => {
+                    loader.style.display = "none";
+                    location.reload();
+                }, 500);
+            })
+            .catch(error => {
+                alert("❌ Ошибка отправки заказа!");
+                console.error("Ошибка:", error);
+                loader.style.display = "none";
+            });
+        }, 1000);
     });
 
     function getWarehouseIcon(warehouse) {
