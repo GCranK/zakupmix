@@ -402,28 +402,29 @@ function updateWarehouseTabs(location) {
             warehouse: currentWarehouse,
             items
         };
-        setTimeout(() => {
-            fetch("https://frontend-developer.uz/sendzakup.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ warehouse: currentWarehouse, items })
-            })
-            .then(response => response.text())
-            .then(data => {
-                console.log("Ответ сервера:", data);
-                alert("✅ Заказ отправлен!");
-                setTimeout(() => {
-                    loader.style.display = "none";
-                    location.reload();
-                }, 500);
-            })
-            .catch(error => {
-                alert("❌ Ошибка отправки заказа!");
-                console.error("Ошибка:", error);
-                loader.style.display = "none";
-            });
-        }, 1000);
-    });
+        fetch("https://frontend-developer.uz/sendzakup.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ location: currentLocation, warehouse: currentWarehouse, items })
+          })
+          .then(response => {
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return response.json();
+          })
+          .then(data => {
+            if (data.status === "success") {
+              alert("✅ Заказ отправлен!");
+              location.reload();
+            } else {
+              alert(`❌ Ошибка: ${data.message}`);
+            }
+          })
+          .catch(err => {
+            console.error("[FETCH ERROR]", err);
+            alert("❌ Ошибка отправки заказа!");
+          })
+          .finally(() => loader.style.display = "none");
+        });
 
     function getWarehouseIcon(warehouse) {
         const icons = {
